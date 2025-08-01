@@ -10,15 +10,42 @@
     "frontendDist": "../dist"
   },
   "app": {
+    "macOSPrivateApi": true,
     "windows": [
       {
-        "title": "multi-search",
+        "label": "main",
+        "title": "Multi-Search",
+        "url": "/",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "visible": true
+      },
+      {
+        "label": "launcher",
+        "url": "/launcher",
+        "width": 640,
+        "height": 80,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "visible": false,
+        "skipTaskbar": true,
+        "shadow": false,
+        "center": true,
+        "resizable": false,
+        "minimizable": false,
+        "maximizable": false,
+        "closable": true,
+        "titleBarStyle": "Overlay"
       }
     ],
     "security": {
       "csp": null
+    }
+  },
+  "plugins": {
+    "globalShortcut": {
+      "shortcuts": ["CmdOrCtrl+Shift+Space"]
     }
   },
   "bundle": {

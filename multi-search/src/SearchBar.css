@@ -1,0 +1,350 @@
+/* Import SF Pro Display font for authentic macOS feel */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* Global reset and transparency foundation */
+html, body, #root {
+    background: transparent !important;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border-radius: 24px;
+}
+
+/* Main search container - native transparency only */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    clip-path: inset(0 round 24px);
+}
+
+/* Subtle inner glow and border for professional feel */
+.search-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.1),
+        0 0 20px rgba(59, 130, 246, 0.1),
+        0 0 40px rgba(59, 130, 246, 0.05);
+    z-index: 0;
+}
+
+/* Content wrapper with native transparency only */
+.search-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    margin: 2px;
+    padding: 0 20px;
+    border-radius: 22px;
+    z-index: 1;
+}
+
+
+.search-container:hover .search-icon {
+    color: rgba(255, 255, 255, 0.95);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+/* Base search icon styling with smooth transitions */
+.search-icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+    flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
+}
+
+/* Fade-in state when typing starts */
+.search-container.fading-in .search-icon {
+    color: rgba(200, 205, 250, 0.85);
+    filter: drop-shadow(0 0 3px rgba(200, 205, 250, 0.4));
+    transform: scale(1.005);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced search icon when typing */
+.search-container.typing:not(.fading-in) .search-icon {
+    animation: iconFade 2.1s ease-in-out infinite;
+    /* Override base transition during animation */
+    transition: none;
+}
+
+/* Intermediate fading state - smoother transition */  
+.search-container.fading .search-icon {
+    color: rgba(200, 205, 250, 0.85);
+    filter: drop-shadow(0 0 3px rgba(200, 205, 250, 0.4));
+    transform: scale(1.005);
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: none; /* Stop the keyframe animation during fade */
+}
+
+/* Gradual transition when stopping typing */
+.search-container:not(.typing):not(.fading):not(.fading-in) .search-icon {
+    color: rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+    transform: scale(1);
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modern input field with smooth animations */
+.search-input {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: inherit;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.search-input:focus::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Focus state enhancement */
+.search-container:focus-within::before {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.15),
+        0 0 0 2px rgba(59, 130, 246, 0.1),
+        0 0 30px rgba(59, 130, 246, 0.2),
+        0 0 60px rgba(59, 130, 246, 0.1);
+}
+
+/* Smooth transitions */
+.search-container::before {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dynamic typing animations - enhanced visibility */
+@keyframes typingGlow {
+    0%, 100% {
+        box-shadow: 
+            inset 0 1px 1px rgba(255, 255, 255, 0.2),
+            0 0 0 3px rgba(59, 130, 246, 0.4),
+            0 0 50px rgba(59, 130, 246, 0.6),
+            0 0 100px rgba(59, 130, 246, 0.3);
+        border-color: rgba(59, 130, 246, 0.6);
+    }
+    50% {
+        box-shadow: 
+            inset 0 1px 1px rgba(255, 255, 255, 0.3),
+            0 0 0 4px rgba(59, 130, 246, 0.8),
+            0 0 70px rgba(59, 130, 246, 0.9),
+            0 0 140px rgba(59, 130, 246, 0.5);
+        border-color: rgba(59, 130, 246, 0.9);
+    }
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+        border-width: 2px;
+    }
+    50% {
+        transform: scale(1.08);
+        opacity: 0.9;
+        border-width: 3px;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+        border-width: 2px;
+    }
+}
+
+@keyframes iconFade {
+    0%, 100% {
+        color: rgba(100, 149, 237, 0.75);
+        filter: drop-shadow(0 0 4px rgba(100, 149, 237, 0.35));
+        transform: scale(1.015);
+    }
+    50% {
+        color: rgba(59, 130, 246, 0.95);
+        filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.7));
+        transform: scale(1.04);
+    }
+}
+
+/* Fade-in state for outline when typing starts */
+.search-container.fading-in::before {
+    border-color: rgba(200, 205, 250, 0.4);
+    box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.12),
+        0 0 0 2px rgba(200, 205, 250, 0.25),
+        0 0 20px rgba(200, 205, 250, 0.3),
+        0 0 40px rgba(200, 205, 250, 0.15);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-container.fading-in::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 28px;
+    border: 2px solid rgba(200, 205, 250, 0.4);
+    opacity: 0.3;
+    transform: scale(1.01);
+    z-index: -1;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Typing state - when user is actively typing */
+.search-container.typing:not(.fading-in)::before {
+    animation: typingGlow 1.8s ease-in-out infinite;
+    transition: none;
+}
+
+/* Additional animated ring effect when typing */
+.search-container.typing:not(.fading-in)::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 28px;
+    border: 2px solid rgba(59, 130, 246, 0.5);
+    animation: pulseRing 2.2s ease-in-out infinite;
+    z-index: -1;
+    transition: none;
+}
+
+/* Intermediate fading state for outline */
+.search-container.fading::before {
+    border-color: rgba(200, 205, 250, 0.4);
+    box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.12),
+        0 0 0 2px rgba(200, 205, 250, 0.25),
+        0 0 20px rgba(200, 205, 250, 0.3),
+        0 0 40px rgba(200, 205, 250, 0.15);
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: none; /* Stop keyframe animation during fade */
+}
+
+.search-container.fading::after {
+    opacity: 0.3;
+    transform: scale(1.01);
+    border-color: rgba(200, 205, 250, 0.4);
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: none; /* Stop keyframe animation during fade */
+}
+
+/* Smooth fade-out when typing stops */
+.search-container:not(.typing):not(.fading):not(.fading-in)::before {
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-container:not(.typing):not(.fading):not(.fading-in)::after {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Selection styling for better UX */
+.search-input::selection {
+    background: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Windows-specific optimizations for acrylic/blur effects */
+@media (-webkit-max-device-pixel-ratio: 1.5) {
+    /* Optimize for Windows displays with different DPI scaling */
+    .search-container::before {
+        /* Slightly more prominent border for Windows acrylic effects */
+        border: 1.5px solid rgba(255, 255, 255, 0.25);
+        /* Adjust shadows for better visibility on Windows blur backgrounds */
+        box-shadow: 
+            inset 0 1px 1px rgba(255, 255, 255, 0.15),
+            0 0 25px rgba(59, 130, 246, 0.12),
+            0 0 50px rgba(59, 130, 246, 0.06);
+    }
+    
+    .search-container:focus-within::before {
+        border-color: rgba(59, 130, 246, 0.5);
+        box-shadow: 
+            inset 0 1px 1px rgba(255, 255, 255, 0.2),
+            0 0 0 2px rgba(59, 130, 246, 0.15),
+            0 0 35px rgba(59, 130, 246, 0.25),
+            0 0 70px rgba(59, 130, 246, 0.12);
+    }
+    
+    /* Enhanced typing animation for Windows acrylic backgrounds */
+    .search-container.typing::before {
+        /* More pronounced glow for better visibility on Windows blur */
+        animation: typingGlow 1.6s ease-in-out infinite;
+        transition: all 0.8s ease-out;
+    }
+    
+    .search-container.typing::after {
+        /* Slightly faster pulse for Windows with thicker border */
+        animation: pulseRing 2.0s ease-in-out infinite;
+        border-width: 3px;
+        border-color: rgba(59, 130, 246, 0.6);
+        transition: all 0.8s ease-out;
+    }
+    
+    /* Windows-specific fade-out */
+    .search-container:not(.typing)::before {
+        transition: all 0.8s ease-out;
+    }
+    
+    .search-container:not(.typing)::after {
+        opacity: 0;
+        transform: scale(0.93);
+        border-width: 1px;
+        transition: all 0.8s ease-out;
+    }
+}
+
+/* High DPI Windows displays (e.g., Surface devices) */
+@media (-webkit-min-device-pixel-ratio: 2) {
+    .search-icon {
+        /* Ensure crisp icon rendering on high-DPI Windows displays */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+    
+    .search-input {
+        /* Improve text rendering on high-DPI Windows displays */
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+}
