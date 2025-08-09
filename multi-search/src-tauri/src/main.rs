@@ -1,10 +1,15 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+// Allow warnings from objc crate macros (external dependency issue)
+#![allow(unexpected_cfgs)]
 
 use tauri::{Manager, AppHandle};
 use tauri_plugin_global_shortcut::{GlobalShortcutExt, ShortcutState};
 use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
-use std::ffi::CStr;
+
+mod index_manager;
+mod embedding_generator;
+mod vector_db;
 
 #[cfg(target_os = "macos")]
 use cocoa::appkit::NSColor;

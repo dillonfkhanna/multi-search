@@ -1,3 +1,10 @@
+// Module declarations
+mod embedding_generator;
+mod index_manager;
+mod orchestrator;
+mod parsers;
+mod vector_db;
+
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
 fn greet(name: &str) -> String {
